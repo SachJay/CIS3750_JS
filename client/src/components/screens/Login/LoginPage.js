@@ -1,9 +1,17 @@
 import { Box, Button, TextInput } from "grommet";
 import { Link } from "@material-ui/core"
 
+const [email, setEmail] = React.useState('');
+const [password, setPassword] = React.useState('');
+
+function validateCred() {
+  if (email == "admin@fitnova.com" && password == "password") {
+    
+  }
+}
+
 function LoginPage() {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+ 
 
   return (
     <div>
