@@ -12,7 +12,7 @@ import {
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { ShoppingCart } from "@material-ui/icons";
 import { useDispatch, useSelector } from 'react-redux';
 import loggedIn from '../../state/actions/loginAction.js';
@@ -94,6 +94,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
@@ -221,6 +222,7 @@ export default function Navbar() {
 
 
   return (
+    {location.pathname !== "/checkout" &&
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar
@@ -257,6 +259,6 @@ export default function Navbar() {
         </Toolbar>
         {productsMenu}
       </AppBar>
-    </div>
+    </div>}
   );
 }
