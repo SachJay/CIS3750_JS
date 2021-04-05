@@ -1,17 +1,22 @@
+import React from "react";
 import { Box, Button, TextInput } from "grommet";
 import { Link } from "@material-ui/core"
+import { useHistory } from "react-router-dom";
 
-const [email, setEmail] = React.useState('');
-const [password, setPassword] = React.useState('');
+export default function LoginPage() {
 
-function validateCred() {
-  if (email == "admin@fitnova.com" && password == "password") {
-    
+  const history = useHistory();
+
+  const routeChange = () =>{ 
+    if (email === "admin@fitnova.com" && password === "password") {
+      let path = `newPath`; 
+      history.push(path);
+    }
+
   }
-}
 
-function LoginPage() {
- 
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   return (
     <div>
@@ -28,6 +33,7 @@ function LoginPage() {
 
         <TextInput
           placeholder="Password"
+          type="password"
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
@@ -35,7 +41,7 @@ function LoginPage() {
         <Button
             label="Login"
             primary 
-            onClick={() => alert('Login')}
+            onClick={() => routeChange()}
         />
         </Box>
 
