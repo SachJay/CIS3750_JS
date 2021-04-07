@@ -1,59 +1,126 @@
 import React from "react";
-import { Box, Button, TextInput } from "grommet";
-import { Link } from "@material-ui/core"
+import { Button, Link, Grid, TextField,  } from "@material-ui/core"
+import { Image } from "grommet";
 import { useHistory } from "react-router-dom";
-
 import { useDispatch } from 'react-redux';
-import loggedIn from 'C:/Users/SachJ/Github/CIS3750_JS/CIS3750_JS/client/src/components/state/actions/loginAction.js';
+import loggedIn from '../../state/actions/loginAction.js';
+import guy from '../../../assets/fitnova_fist.png'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const routeChange = () =>{ 
-   // if (email === "admin@fitnova.com" && password === "password") {
+  const routeChange = () => { 
+    if (password === "password") {
       dispatch(loggedIn());
       let path = ``; 
       history.push(path);
- //   }
+    } else {
+      setIsValid(false)
+    }
   }
+
+  const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#fe838b',
+            main: '#FE646F',
+            dark: '#b1464d',
+            contrastText: '#fff',
+        },
+        secondary: {
+            light: '#fe838b',
+            main: '#FE646F',
+            dark: '#b1464d',
+            contrastText: '#000',
+        },
+      },
+  });
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isValid, setIsValid] = React.useState(true);
+  var inputFields;
 
-  return (
-    <div>
-       
-
-        <Box display="flex" justifyContent="center"  background="white" style = {{width: 600}}>
-          <h1>Welcome</h1>
-          <img src="fitnova_icon.png"></img><br/>
-          <TextInput
-            placeholder="Email"
-            value={email}
+  if (isValid) {
+      inputFields = <div>
+        <TextField
+            required
+            id="outlined-required"
+            label="Email"
+            defaultValue=""
+            variant="outlined"
+            style={{ marginTop: '50px', width: '400px' }}
             onChange={event => setEmail(event.target.value)}
-            style = {{width: 600}}
-          />
+          /> <br/>
 
-          <TextInput
-            placeholder="Password"
+          <TextField
+            required
+            id="filled-password-input"
+            label="Password"
             type="password"
-            value={password}
-            style = {{width: 600}}
+            variant="outlined"
+            style={{ marginTop: '10px', width: '400px' }}
             onChange={event => setPassword(event.target.value)}
           />
+      </div>
+  } else {
+    inputFields = <div>
+      <TextField
+        error
+        label="Email"
+        defaultValue={email}
+        variant="outlined"
+        style={{ marginTop: '50px', width: '400px' }}
+        onChange={event => setEmail(event.target.value)}
+      /><br/>
 
-          <Button
+      <TextField
+        error
+        label="Password"
+        defaultValue={password}
+        type="password"
+        variant="outlined"
+        helperText="Invalid Credentials"
+        style={{ marginTop: '10px', width: '400px' }}
+        onChange={event => setPassword(event.target.value)}
+      />
+    </div>
+  }
+
+  return (
+    
+    <div>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <h1 style={{ color: '#FE646F', marginTop: '100px', fontSize: '60px' }}>Welcome</h1>
+          <Image fit="contain" src={guy} style={{ marginTop: '20px' }}/>
+
+          {inputFields}  
+
+          <ThemeProvider theme={theme}>
+            <Button
               label="Login"
-              primary 
-              style = {{width: 100}}
-              onClick={() => routeChange()}
-          />
+              variant="contained"
+              color="primary"
+              borderRadius={500}
+              style={{ marginTop: '30px' }}
+              onClick={() => routeChange()}>
+              Login
+            </Button>
+          </ThemeProvider>
 
           <Link
             component="button"
             variant="body2"
+            color='black'
+            style={{ marginTop: '30px' }}
             onClick={() => {
               alert("Take me to reset password"); //not going to happen
             }}
@@ -64,6 +131,8 @@ export default function LoginPage() {
           <Link
             component="button"
             variant="body2"
+            style={{ marginBottom: '100px' }}
+            color='black'
             onClick={() => {
               alert("Take me to register"); //not going to happen
             }}
@@ -71,7 +140,7 @@ export default function LoginPage() {
             Don’t have an account? Sign up!
           </Link><br/>
 
-        </Box>
+        </Grid>
 
         
     </div>
