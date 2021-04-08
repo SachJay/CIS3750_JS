@@ -220,9 +220,9 @@ export default function Navbar() {
       </div>
   }
 
-
+  console.log(location);
   return (
-    {location.pathname !== "/checkout" &&
+    // {location !== "/checkout" &&
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar
@@ -259,6 +259,6 @@ export default function Navbar() {
         </Toolbar>
         {productsMenu}
       </AppBar>
-    </div>}
+    </div>
   );
 }

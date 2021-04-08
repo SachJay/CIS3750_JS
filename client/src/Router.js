@@ -11,9 +11,11 @@ import CheckoutPage from "./components/screens/Checkout/Checkout";
 export default function Router() {
   let navbar;
 
-  if(window.location.pathname.includes("checkout")) {
+  if (window.location.pathname.includes("checkout")) {
+    console.log(window.location.pathname);
     navbar = <div></div>
   } else {
+    console.log(window.location.pathname);
     navbar = <div><Navbar /></div>;
   }
 
