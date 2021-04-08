@@ -254,7 +254,7 @@ export default function Products() {
         setProducts(resp.data.records);
       });
 
-    document.title = "Products Page";
+    document.title = "Products";
     // Filter by
     // return () => {};
   }, [sortBy, filterPrice, category]);
