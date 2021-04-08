@@ -43,21 +43,53 @@ const useStyles = makeStyles((theme) => ({
   productCardImage: {
     height: 140,
   },
-  optionsMenuContainer: {
+  optionsMenuItemList: {
     display: "flex",
-    flexWrap: "wrap",
     flexDirection: "column",
+    alignItems: "center",
   },
+  optionMenuItem: {
+    fontWeight: "bold",
+    borderRadius: "10px",
+    width: "150px",
+    margin: "0 0 0 5px",
+    justifyContent: "center",
+    border: "none",
+    textTransform: 'none',
+    fontSize: 16
+  },
+  optionTitle: {
+    marginBottom: 0
+  },
+  thumb: {
+    background: "#FE646F",
+    "&~&": {
+      background: "#FE646F"
+    }
+  },
+  rail: {
+    background: "#FE646F"
+  },
+  track: {
+    background: "#FE646F"
+  },
+  valueLabel: {
+    "&>*": {
+      background: "#FE646F"
+    }
+  }
 }));
 
 const SortOptions = ({ sortBy, setSortBy }) => {
+  const classes = useStyles();
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <ButtonGroup orientation="vertical" variant="text">
+    <div className={classes.optionsMenuItemList}>
+      <ButtonGroup className={classes.optionMenuItem} orientation="vertical" variant="outlined">
         <Button
           onClick={() => {
             setSortBy(0);
           }}
+          className={classes.optionMenuItem}
         >
           Low to High
         </Button>
@@ -65,6 +97,7 @@ const SortOptions = ({ sortBy, setSortBy }) => {
           onClick={() => {
             setSortBy(1);
           }}
+          className={classes.optionMenuItem}
         >
           High to Low
         </Button>
@@ -74,14 +107,16 @@ const SortOptions = ({ sortBy, setSortBy }) => {
 };
 
 const CategoryOptions = ({ category, setCategory }) => {
+  const classes = useStyles();
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <ButtonGroup orientation="vertical" variant="text">
+      <div className={classes.optionsMenuItemList}>
+        <ButtonGroup className={classes.optionMenuItem} orientation="vertical" variant="outlined">
           <Button
             onClick={() => {
               setCategory("weights");
             }}
+            className={classes.optionMenuItem}
           >
             Weights
           </Button>
@@ -89,6 +124,7 @@ const CategoryOptions = ({ category, setCategory }) => {
             onClick={() => {
               setCategory("protein");
             }}
+            className={classes.optionMenuItem}
           >
             Protein
           </Button>
@@ -96,6 +132,7 @@ const CategoryOptions = ({ category, setCategory }) => {
             onClick={() => {
               setCategory("fitness gear");
             }}
+            className={classes.optionMenuItem}
           >
             Fitness Gear
           </Button>
@@ -103,6 +140,7 @@ const CategoryOptions = ({ category, setCategory }) => {
             onClick={() => {
               setCategory("others");
             }}
+            className={classes.optionMenuItem}
           >
             Others
           </Button>
@@ -110,6 +148,7 @@ const CategoryOptions = ({ category, setCategory }) => {
             onClick={() => {
               setCategory(null);
             }}
+            className={classes.optionMenuItem}
           >
             All Products
           </Button>
@@ -123,10 +162,16 @@ const FilterOptions = ({ filterPrice, setFilterPrice }) => {
   const handleChange = (event, newValue) => {
     setFilterPrice(newValue);
   };
-
+  const classes = useStyles();
   return (
     <>
       <Slider
+        classes={{
+          thumb: classes.thumb,
+          rail: classes.rail,
+          track: classes.track,
+          valueLabel: classes.valueLabel,
+        }}
         min={0}
         max={2000}
         value={filterPrice}
@@ -150,13 +195,16 @@ const ProductOptionsMenu = ({
     marginTop: 10,
     marginBottom: 10,
     maxWidth: 220,
+    width: 200,
     backgroundColor: "#EFF0F6",
   };
+
+  const classes = useStyles();
 
   return (
     <>
       <Accordion style={styles} elevation={0}>
-        <AccordionSummary expandIcon={<ExpandMore />}>
+        <AccordionSummary className={classes.optionTitle} expandIcon={<ExpandMore />}>
           <Typography><b>Categories</b></Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -314,7 +362,7 @@ export default function Products() {
                 // console.log(category, product["category"]);
                 return (
                   product["category"].toLowerCase() ===
-                    (category ? category : product["category"].toLowerCase()) &&
+                  (category ? category : product["category"].toLowerCase()) &&
                   product["price"] <= filterPrice[1] &&
                   product["price"] >= filterPrice[0]
                 );
