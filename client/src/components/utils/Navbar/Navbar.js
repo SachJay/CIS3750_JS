@@ -126,6 +126,10 @@ export default function Navbar() {
     dispatch(loggedIn());
   };
 
+  let redirectToCheckout = (event) => {
+    history.push("checkout");
+  };
+
  
 
   let productsMenu = (
@@ -246,7 +250,7 @@ export default function Navbar() {
             />
           </div>
           <IconButton className={classes.shoppingCartButton}>
-            <ShoppingCart className={classes.shoppingCartIcon} size="small" />
+            <ShoppingCart className={classes.shoppingCartIcon} size="small" onClick={redirectToCheckout} />
           </IconButton>
 
           {loginOptions}
