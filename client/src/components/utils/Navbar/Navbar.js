@@ -13,6 +13,9 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link, useHistory } from "react-router-dom";
 import { ShoppingCart } from "@material-ui/icons";
+import { useDispatch, useSelector } from 'react-redux';
+import loggedIn from '../../state/actions/loginAction.js';
+
 import "./Navbar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +92,8 @@ export default function Navbar() {
   const classes = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+  const isLogged = useSelector(state => state.isLogged);
+  const dispatch = useDispatch();
 
   let handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -104,6 +109,20 @@ export default function Navbar() {
     // console.log(event.target.value);
     history.push("/products", { searchInput: searchString });
   };
+
+  let redirectToLogin = (event) => {
+    history.push("login");
+  };
+
+  let redirectToInventory = (event) => {
+    history.push("inventory");
+  };
+
+  let redirectToLogout = (event) => {
+    dispatch(loggedIn());
+  };
+
+ 
 
   let productsMenu = (
     <Menu
@@ -148,6 +167,30 @@ export default function Navbar() {
     </Menu>
   );
 
+  let navbarButtons;
+  if (isLogged) {
+
+    navbarButtons = 
+      <div>
+        <Button className={classes.navButtons} onClick={redirectToInventory}>
+          Inventory
+        </Button>
+
+        <Button className={classes.navButtons} onClick={redirectToLogout}>
+          Logout
+        </Button>
+      </div>
+      
+  } else {
+
+    navbarButtons = 
+      <div>
+        <Button className={classes.navButtons} onClick={redirectToLogin}>
+          Login
+        </Button>
+      </div>
+  }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -158,6 +201,9 @@ export default function Navbar() {
           <Button className={classes.navButtons} onClick={handleClick}>
             Products
           </Button>
+
+          {navbarButtons}
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
