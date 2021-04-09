@@ -1,9 +1,11 @@
 import React from "react";
-import { Button, Link, Grid, TextField,  } from "@material-ui/core"
+import { Button, Link, Grid, TextField } from "@material-ui/core"
 import { Image } from "grommet";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import loggedIn from '../../state/actions/loginAction.js';
+import loginPopup from '../../state/actions/loginPopupAction';
+
 import guy from '../../../assets/fitnova_fist.png'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -15,8 +17,11 @@ export default function LoginPage() {
   const routeChange = () => { 
     if (password === "password") {
       dispatch(loggedIn());
+      dispatch(loginPopup());
+
       let path = ``; 
       history.push(path);
+      
     } else {
       setIsValid(false)
     }

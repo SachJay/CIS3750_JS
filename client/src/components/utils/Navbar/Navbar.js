@@ -16,6 +16,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { ShoppingCart } from "@material-ui/icons";
 import { useDispatch, useSelector } from 'react-redux';
 import loggedIn from '../../state/actions/loginAction.js';
+import logoutPopup from '../../state/actions/logoutPopupAction';
 
 import "./Navbar.css";
 
@@ -125,6 +126,7 @@ export default function Navbar() {
   let redirectToLogout = (event) => {
     history.push("/")
     dispatch(loggedIn());
+    dispatch(logoutPopup());
   };
 
   let redirectToCheckout = (event) => {
