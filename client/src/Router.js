@@ -9,20 +9,10 @@ import Navbar from "./components/utils/Navbar/Navbar";
 import CheckoutPage from "./components/screens/Checkout/Checkout";
 
 export default function Router() {
-  let navbar;
-
-  if (window.location.pathname.includes("checkout")) {
-    console.log(window.location.pathname);
-    navbar = <div></div>
-  } else {
-    console.log(window.location.pathname);
-    navbar = <div><Navbar /></div>;
-  }
-
   return (
     <div style={{ marginBottom: 100 }}>
       <BrowserRouter>
-        {navbar}
+        <Navbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/products" exact component={Products} />

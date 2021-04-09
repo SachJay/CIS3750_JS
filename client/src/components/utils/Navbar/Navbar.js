@@ -11,11 +11,11 @@ import {
 } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { ShoppingCart } from "@material-ui/icons";
-import { useDispatch, useSelector } from 'react-redux';
-import loggedIn from '../../state/actions/loginAction.js';
+import { useDispatch, useSelector } from "react-redux";
+import loggedIn from "../../state/actions/loginAction.js";
 
 import "./Navbar.css";
 
@@ -96,7 +96,7 @@ export default function Navbar() {
   const history = useHistory();
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
-  const isLogged = useSelector(state => state.isLogged);
+  const isLogged = useSelector((state) => state.isLogged);
   const dispatch = useDispatch();
 
   let handleClick = (event) => {
@@ -123,15 +123,13 @@ export default function Navbar() {
   };
 
   let redirectToLogout = (event) => {
-    history.push("/")
+    history.push("/");
     dispatch(loggedIn());
   };
 
   let redirectToCheckout = (event) => {
     history.push("checkout");
   };
-
- 
 
   let productsMenu = (
     <Menu
@@ -186,41 +184,51 @@ export default function Navbar() {
 
   let employeeOptions;
   if (isLogged) {
-
-    employeeOptions = 
+    employeeOptions = (
       <div>
         <Button className={classes.navButtons} onClick={redirectToInventory}>
           Inventory
         </Button>
 
-        <Button className={classes.navButtons} onClick={() => {console.log("Redirecting to orders page")}}>
+        <Button
+          className={classes.navButtons}
+          onClick={() => {
+            console.log("Redirecting to orders page");
+          }}
+        >
           Orders
         </Button>
       </div>
-      
+    );
   }
 
   let loginOptions;
   if (isLogged) {
-
-    loginOptions = 
+    loginOptions = (
       <div>
-        <Button startIcon={<AccountCircleIcon className={classes.shoppingCartIcon}/>} className={classes.navButtons} onClick={redirectToLogout}>
+        <Button
+          startIcon={<AccountCircleIcon className={classes.shoppingCartIcon} />}
+          className={classes.navButtons}
+          onClick={redirectToLogout}
+        >
           Logout
         </Button>
       </div>
-      
+    );
   } else {
-
-    loginOptions = 
+    loginOptions = (
       <div>
-        <Button startIcon={<AccountCircleIcon className={classes.shoppingCartIcon}/>} className={classes.navButtons} onClick={redirectToLogin}>
+        <Button
+          startIcon={<AccountCircleIcon className={classes.shoppingCartIcon} />}
+          className={classes.navButtons}
+          onClick={redirectToLogin}
+        >
           Login
         </Button>
       </div>
+    );
   }
 
-  console.log(location);
   return (
     // {location !== "/checkout" &&
     <div className={classes.grow}>
@@ -252,7 +260,11 @@ export default function Navbar() {
             />
           </div>
           <IconButton className={classes.shoppingCartButton}>
-            <ShoppingCart className={classes.shoppingCartIcon} size="small" onClick={redirectToCheckout} />
+            <ShoppingCart
+              className={classes.shoppingCartIcon}
+              size="small"
+              onClick={redirectToCheckout}
+            />
           </IconButton>
 
           {loginOptions}

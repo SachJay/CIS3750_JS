@@ -55,36 +55,40 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 0 0 5px",
     justifyContent: "center",
     border: "none",
-    textTransform: 'none',
-    fontSize: 16
+    textTransform: "none",
+    fontSize: 16,
   },
   optionTitle: {
-    marginBottom: 0
+    marginBottom: 0,
   },
   thumb: {
     background: "#FE646F",
     "&~&": {
-      background: "#FE646F"
-    }
+      background: "#FE646F",
+    },
   },
   rail: {
-    background: "#FE646F"
+    background: "#FE646F",
   },
   track: {
-    background: "#FE646F"
+    background: "#FE646F",
   },
   valueLabel: {
     "&>*": {
-      background: "#FE646F"
-    }
-  }
+      background: "#FE646F",
+    },
+  },
 }));
 
 const SortOptions = ({ sortBy, setSortBy }) => {
   const classes = useStyles();
   return (
     <div className={classes.optionsMenuItemList}>
-      <ButtonGroup className={classes.optionMenuItem} orientation="vertical" variant="outlined">
+      <ButtonGroup
+        className={classes.optionMenuItem}
+        orientation="vertical"
+        variant="outlined"
+      >
         <Button
           onClick={() => {
             setSortBy(0);
@@ -111,7 +115,11 @@ const CategoryOptions = ({ category, setCategory }) => {
   return (
     <>
       <div className={classes.optionsMenuItemList}>
-        <ButtonGroup className={classes.optionMenuItem} orientation="vertical" variant="outlined">
+        <ButtonGroup
+          className={classes.optionMenuItem}
+          orientation="vertical"
+          variant="outlined"
+        >
           <Button
             onClick={() => {
               setCategory("weights");
@@ -204,8 +212,13 @@ const ProductOptionsMenu = ({
   return (
     <>
       <Accordion style={styles} elevation={0}>
-        <AccordionSummary className={classes.optionTitle} expandIcon={<ExpandMore />}>
-          <Typography><b>Categories</b></Typography>
+        <AccordionSummary
+          className={classes.optionTitle}
+          expandIcon={<ExpandMore />}
+        >
+          <Typography>
+            <b>Categories</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <CategoryOptions category={category} setCategory={setCategory} />
@@ -213,7 +226,9 @@ const ProductOptionsMenu = ({
       </Accordion>
       <Accordion style={styles} elevation={0}>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography><b>Filter by Price</b></Typography>
+          <Typography>
+            <b>Filter by Price</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterOptions
@@ -224,7 +239,9 @@ const ProductOptionsMenu = ({
       </Accordion>
       <Accordion style={styles} elevation={0}>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography><b>Sort by Price</b></Typography>
+          <Typography>
+            <b>Sort by Price</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
@@ -362,7 +379,7 @@ export default function Products() {
                 // console.log(category, product["category"]);
                 return (
                   product["category"].toLowerCase() ===
-                  (category ? category : product["category"].toLowerCase()) &&
+                    (category ? category : product["category"].toLowerCase()) &&
                   product["price"] <= filterPrice[1] &&
                   product["price"] >= filterPrice[0]
                 );
