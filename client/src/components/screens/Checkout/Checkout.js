@@ -15,17 +15,20 @@ const useStyles = makeStyles((theme) => ({
     padding: "5px",
   },
   container: {
-    height: "100%"
-  }
+    height: "100%",
+  },
 }));
 
 function Checkout(props) {
   const classes = useStyles();
+  document.title = "Checkout";
 
   return (
     <div>
       <AppBar position="static" className={classes.appbar}>
-        <Typography variant="h6"><b>Checkout</b></Typography>
+        <Typography variant="h6">
+          <b>Checkout</b>
+        </Typography>
       </AppBar>
       <Box className={classes.container}>
         <Container style={{ marginTop: 10 }}>
